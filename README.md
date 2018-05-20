@@ -35,6 +35,7 @@ In any case, please update the `DATABASES` section in the `settings.py` under th
 ```
 (llt)$ python manage.py makemigrations
 (llt)$ python manage.py migrate
+(llt)$ python manage.py createsuperuser --username=admin --email=admin@acme.com
 (llt)$ python manage.py runserver 0.0.0.0:8000
 ```
 You can open your browser to following URLs:
