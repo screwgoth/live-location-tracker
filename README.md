@@ -5,7 +5,7 @@ Please look at the comment titled `Live Location and trip tracking through phone
 https://github.com/datameet-pune/datameet-pune.github.io/issues/15
 
 
-# Development Setup
+# Development Setup for Server
 
 ### Clone this repo
 ```
