@@ -1,0 +1,16 @@
+.form-wrapper {
+   height: 100%;
+   margin-top: 68px;
+  }
+  .form-content {
+    background-color: #ECEEF0;
+      box-shadow: 5px 10px 8px 10px #888888;
+      width: 300px;
+  }
+  .custom-alert {
+      position: fixed;
+      right: 0;
+      top: 50px;
+      width: 300px;
+      transition: all 0.5s ease-in-out;
+}
