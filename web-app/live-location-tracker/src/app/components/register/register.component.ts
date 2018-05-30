@@ -30,15 +30,12 @@ export class RegisterComponent implements OnInit {
     });
   }
   registerUser(form) {
-    console.log(form.value);
     this.data = {
       username: form.value['username'],
       email: form.value['email'],
       password: form.value['password']
     };
-    console.log(this.data);
     this.service.registerUser(this.data).subscribe(result => {
-      console.log(result['message']);
       this.submitUserAlert = result['message'];
       this.userForm.reset();
     }, error => {
