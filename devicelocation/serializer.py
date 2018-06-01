@@ -8,13 +8,10 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class DeviceLocationSerializer(serializers.ModelSerializer):
+class ListLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeviceLocation
-        fields = ['deviceID','lat', 'long', 'speed', 'accuracy', 'timestamp']
+        fields = ["lat", "long"]
 
 
-class DeviceLocationListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DeviceLocation
-        fields = ['deviceID', 'lat', 'long', 'speed', 'accuracy', 'timestamp']
+

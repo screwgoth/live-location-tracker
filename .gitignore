@@ -5,3 +5,4 @@
 *.log
 __pycache__
 .idea/*
+bash.exe.stackdump
