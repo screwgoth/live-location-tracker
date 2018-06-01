@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
-# Create your models here.
 class DeviceLocation(models.Model):
     lat = models.CharField(max_length=50)
     long = models.CharField(max_length=50)
+    user = models.ForeignKey(User, related_name="location_user", on_delete="PROTECT",null=True)
     annotation = models.CharField(max_length=50, null=True, blank=True)
     satellites = models.CharField(max_length=50, null=True, blank=True)
     altitude = models.CharField(max_length=50, null=True, blank=True)

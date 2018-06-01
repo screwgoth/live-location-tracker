@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(%q41+vc)jml1r9-connhnd9c!w3(b0on*k9kib56l*ha8!%e7'
@@ -22,7 +24,7 @@ SECRET_KEY = '(%q41+vc)jml1r9-connhnd9c!w3(b0on*k9kib56l*ha8!%e7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["20.20.5.105"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -53,7 +55,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'livelocationtracker.urls'
 
+
 CORS_ORIGIN_ALLOW_ALL = True
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+#     'django.template.loaders.eggs.load_template_source',
+)
 
 TEMPLATES = [
     {
@@ -62,9 +71,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -109,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -128,6 +142,17 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.LimitOffsetPagination',
         'PAGE_SIZE': 10,
 }
+
+
+LEAFLET_CONFIG = {
+    'PLUGINS': {
+        'forms': {
+            'auto-include': True
+        }
+    }
+}
+
+
 
 # Logging
 # LOGGING = {
