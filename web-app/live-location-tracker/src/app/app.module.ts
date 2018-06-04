@@ -13,6 +13,8 @@ import { AuthService } from './services/auth.service';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { AuthGuard } from './services/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     AlertModule.forRoot()
   ],
-  providers: [RegisterService, AuthService],
+  providers: [RegisterService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

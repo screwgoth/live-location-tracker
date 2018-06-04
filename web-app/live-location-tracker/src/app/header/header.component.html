@@ -7,14 +7,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Sign up <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Sign in</a>
+        <a class="nav-link" routerLink="/register" 
+        routerLinkActive="active">Sign up <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-          <a routerLink="/login" (click)="signOut()" class="nav-link">Sign out</a>
+      <li class="nav-item" *ngIf="!this.service.isLoggedin()">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
+      </li>
+      <li class="nav-item" *ngIf="this.service.isLoggedin()">
+          <a routerLink="/login" (click)="signOut()" class="nav-link" 
+          routerLinkActive="active">Sign out</a>
       </li>
     </ul>
   </div>
