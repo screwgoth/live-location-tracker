@@ -9,9 +9,8 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class ListLocationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = DeviceLocation
-        fields = ["lat", "long"]
-
-
+        fields = ["lat", "long", "user"]
 

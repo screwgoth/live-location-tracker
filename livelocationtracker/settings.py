@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'channels',
+    'channels_api',
     'rest_framework.authtoken',
     'devicelocation',
+
 ]
 
 MIDDLEWARE = [
@@ -58,11 +61,6 @@ ROOT_URLCONF = 'livelocationtracker.urls'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
-)
 
 TEMPLATES = [
     {
@@ -144,14 +142,21 @@ REST_FRAMEWORK = {
 }
 
 
-LEAFLET_CONFIG = {
-    'PLUGINS': {
-        'forms': {
-            'auto-include': True
-        }
-    }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "livelocationtracker.routing.channel_routing",
+    },
 }
 
+
+CHANNELS_API = {
+    'DEFAULT_PERMISSION_CLASSES': ('channels_api.permissions.AllowAny',)
+
+}
 
 
 # Logging
