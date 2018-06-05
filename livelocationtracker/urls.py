@@ -24,4 +24,6 @@ urlpatterns = [
     path('api/v1/', include((userRouter, "userinfo"), namespace="user_api")),
     # path('api/v1/location/', include(("devicelocation.urls", "devicelocation"), namespace='devicelocation-api')),
     path('api/v1/location/', include((LocationRouter, "devicelocation"), namespace='location-api')),
+    path(r'channels-api/', include('channels_api.urls'))
+
 ]
