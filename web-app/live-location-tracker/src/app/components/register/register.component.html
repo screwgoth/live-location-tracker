@@ -1,0 +1,59 @@
+<div class="form-wrapper p-2 d-flex justify-content-center align-items-center">
+	<div class="form-content p-3 border">
+   	<h5 class="text-center">Register here</h5>
+		<form [formGroup]="userForm" (ngSubmit)="registerUser(userForm)">
+			<div class="form-group">
+				<label for="username1">Username</label>
+        <input type="text" class="form-control" id="username1" formControlName="username"
+        placeholder="Enter username" 
+         required>
+        <div *ngIf="userForm.controls['username'].invalid && (userForm.controls['username'].dirty || userForm.controls['username'].touched)" 
+        class="alert alert-danger">
+        <div *ngIf="userForm.controls['username'].errors.required">
+          <small id="username" class="form-text">Username required.</small>
+        </div>
+       </div>
+			</div>
+			<div class="form-group">
+				<label for="emailid">Email address</label>
+        <input type="email" class="form-control" id="emailid" placeholder="Enter email" 
+        formControlName="email">
+			  <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" 
+        class="alert alert-danger">
+        <div *ngIf="userForm.controls['email'].errors.required">
+          <small id="username" class="form-text">Email id required.</small>
+        </div>
+        <div *ngIf="userForm.controls['email'].errors.email">
+          <small id="email" class="form-text">Vaild Email id required.</small>
+        </div>
+       </div>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" 
+        formControlName="password">
+        <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" 
+        class="alert alert-danger">
+        <div *ngIf="userForm.controls['password'].errors.required">
+          <small id="password" class="form-text">Password id required.</small>
+        </div>
+        <div *ngIf="userForm.controls['password'].errors.minlength">
+          <small id="password" class="form-text">Password should be atleast 5 character.</small>
+        </div>
+       </div>
+			</div>
+      <button type="submit" class="btn btn-primary" 
+      [disabled]="!userForm.valid">Submit</button>
+		</form>
+	</div>
+
+  <alert type="success" class="custom-alert" 
+  *ngIf="submitUserAlert" dismissible="true">
+    <strong>{{submitUserAlert}}</strong>
+  </alert>
+
+    <alert class="custom-alert" type="danger"
+    *ngIf="errorSubmitAlert" dismissible="true">
+      <strong>{{errorSubmitAlert}}</strong>
+    </alert>
+</div>

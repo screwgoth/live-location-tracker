@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from userinfo import urls as userRouter
+from devicelocation import urls as LocationRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/v1/', include((userRouter, "userinfo"), namespace="user_api")),
+    # path('api/v1/location/', include(("devicelocation.urls", "devicelocation"), namespace='devicelocation-api')),
+    path('api/v1/location/', include((LocationRouter, "devicelocation"), namespace='location-api')),
 
-    path('api/v1/location/', include(("devicelocation.urls", "devicelocation"), namespace='devicelocation-api')),
 ]
