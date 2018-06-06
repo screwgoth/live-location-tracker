@@ -1,3 +1,5 @@
+import threading
+import time
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -25,9 +27,25 @@ class DeviceLocation(models.Model):
     hdop = models.CharField(max_length=50, null=True, blank=True)
     vdop = models.CharField(max_length=50, null=True, blank=True)
     pdop = models.CharField(max_length=50, null=True, blank=True)
+    server_timestamp = models.IntegerField()
 
     class Meta:
         verbose_name = "DeviceLocation"
 
     def __unicode__(self):
-        return self.name
+        return self.pk
+
+    def get_lat_long(self):
+        """
+        This method returns the lat-long that comes within last 5 second
+        :param username: 
+        :return: lat and long of given user
+        """
+        current_timestamp = int(time.time())
+        location_obj = DeviceLocation.objects.filter(server_timestamp__range=[current_timestamp - 10, current_timestamp])
+        print(current_timestamp, current_timestamp - 5)
+        return location_obj
+
+
+
+
