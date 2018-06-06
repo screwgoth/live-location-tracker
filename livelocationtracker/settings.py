@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'channels',
-    'channels_api',
     'rest_framework.authtoken',
     'devicelocation',
 
@@ -139,23 +137,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.LimitOffsetPagination',
         'PAGE_SIZE': 10,
-}
-
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-        },
-        "ROUTING": "livelocationtracker.routing.channel_routing",
-    },
-}
-
-
-CHANNELS_API = {
-    'DEFAULT_PERMISSION_CLASSES': ('channels_api.permissions.AllowAny',)
-
 }
 
 
