@@ -11,13 +11,11 @@ class LocationSerializer(serializers.ModelSerializer):
         exclude = ("server_timestamp",)
 
     def create(self, validated_data):
-        print("In Create")
         profile = validated_data.pop("profile")
         try:
             server_time = int(time.time())
             user = User.objects.get(username=profile)
             location = DeviceLocation.objects.create(user=user, server_timestamp=server_time, **validated_data)
-            print(location)
             return location
         except User.DoesNotExist:
             raise ValidationError("Bad Request")
