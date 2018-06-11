@@ -2,13 +2,15 @@ from rest_framework import serializers
 from devicelocation.models import DeviceLocation
 
 
-class DeviceLocationSerializer(serializers.ModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeviceLocation
-        fields = ['deviceID','lat', 'long', 'speed', 'accuracy', 'timestamp']
+        fields = "__all__"
 
 
-class DeviceLocationListSerializer(serializers.ModelSerializer):
+class ListLocationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = DeviceLocation
-        fields = ['deviceID', 'lat', 'long', 'speed', 'accuracy', 'timestamp']
+        fields = ["lat", "long", "user"]
+

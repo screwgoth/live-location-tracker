@@ -1,31 +1,17 @@
-import datetime
-import time
-
-from rest_framework import generics
-from rest_framework import status
-from rest_framework.response import Response
-from devicelocation.models import DeviceLocation
-from .serializer import DeviceLocationListSerializer, DeviceLocationSerializer
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework import viewsets
+from .serializer import *
 
 
-# Create your views here.
-class DeviceLocationListAPIView(generics.ListAPIView):
+@permission_classes((AllowAny,))
+class LocationViewSet(viewsets.ModelViewSet):
     queryset = DeviceLocation.objects.all()
-    serializer_class = DeviceLocationListSerializer
+    serializer_class = LocationSerializer
+    second_serializer_class = ListLocationSerializer
 
-
-class DeviceLocationCreateAPIView(generics.CreateAPIView):
-    queryset = DeviceLocation.objects.all()
-    serializer_class = DeviceLocationSerializer
-
-    def creat(self, request, *args, **kwargs):
-        serializer = DeviceLocationSerializer(data=request,
-                                                context={'request': request})
-
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED,
-                        headers=headers)
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return self.second_serializer_class
+        else:
+            return self.serializer_class
