@@ -6,3 +6,4 @@
 __pycache__
 .idea/*
 bash.exe.stackdump
+.vscode
