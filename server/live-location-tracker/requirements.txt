@@ -4,6 +4,7 @@ Django==2.0.5
 django-cors-headers==2.2.0
 django-filter==1.1.0
 djangorestframework==3.8.2
+gunicorn==19.8.1
 idna==2.6
 mysqlclient==1.3.12
 pytz==2018.4
