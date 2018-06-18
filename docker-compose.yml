@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+    llt-web:
+        build: ./web-client
+        image: llt-frontend:latest
+        expose:
+            - "4200"
+        ports:
+            - "4200:4200"
+        depends_on:
+            - llt-server
+            - llt-db
+        links:
+            - llt-server
+            - llt-db
+    
+    llt-server:
+        build: ./server
+        image: llt-backend:latest
+        expose:
+            - "8000"
+        ports:
+            - "8000:8000"
+        depends_on:
+            - llt-db
+        links:
+            - llt-db
+    
+
+    llt-db:
+        image: mysql:latest
+        expose:
+            - "3306"
+        ports:
+            - "3306:3306"
+        entrypoint: ['/entrypoint.sh', '--default-authentication-plugin=mysql_native_password']
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=llt-db
+
+
+

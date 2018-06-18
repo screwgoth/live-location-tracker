@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,6 +11,12 @@ export class RegisterService {
 
   registerUser(data) {
     console.log(data);
-   return this.http.post(`${this.rootUrl}register/`, data);
+    let httpHeaders = new HttpHeaders({
+      'Content-Type' : 'text/plain'
+    });
+    let options = {
+      headers: httpHeaders
+    };
+   return this.http.post(`${this.rootUrl}register/`, data, options);
   }
 }
