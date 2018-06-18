@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://llt-server:8000/api/v1/users/'
+  API_URL:'/api/v1/users/'
 };
 
 /*

@@ -1,6 +1,7 @@
-FROM raseel/ubuntu16-node
+FROM raseel/ubuntu16-node as builder
 MAINTAINER Raseel Bhagat <raseelbhagat@gmail.com>
 
+RUN apt-get update && apt-get install -y --no-install-recommends nginx
 RUN mkdir -p /web-client
 COPY src /web-client/src
 
@@ -8,11 +9,16 @@ COPY angular.json /web-client/angular.json
 COPY package.json /web-client/package.json
 COPY tsconfig.json /web-client/tsconfig.json
 COPY tslint.json /web-client/tslint.json
-COPY entrypoint.sh /entrypoint.sh
+#COPY entrypoint.sh /entrypoint.sh
 
 WORKDIR /web-client
-RUN npm install
+RUN npm install && npm run build
 
-EXPOSE 4200
+# Final
+FROM nginx:latest
+COPY --from=builder /web-client/dist/live-location-tracker/ /usr/share/nginx/html/
+COPY ./llt.conf /etc/nginx/conf.d/default.conf
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+EXPOSE 80
+
+#ENTRYPOINT [ "service", "nginx", "start" ]

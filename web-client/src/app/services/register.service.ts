@@ -11,12 +11,6 @@ export class RegisterService {
 
   registerUser(data) {
     console.log(data);
-    let httpHeaders = new HttpHeaders({
-      'Content-Type' : 'text/plain'
-    });
-    let options = {
-      headers: httpHeaders
-    };
-   return this.http.post(`${this.rootUrl}register/`, data, options);
+   return this.http.post(`${this.rootUrl}register/`, data);
   }
 }
