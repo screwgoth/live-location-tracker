@@ -11,10 +11,10 @@
         <a class="nav-link" routerLink="/register" 
         routerLinkActive="active">Sign up <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" *ngIf="!this.service.isLoggedin()">
+      <li class="nav-item" *ngIf="!isLoggedIn">
         <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
       </li>
-      <li class="nav-item" *ngIf="this.service.isLoggedin()">
+      <li class="nav-item" *ngIf="isLoggedIn">
           <a routerLink="/login" (click)="signOut()" class="nav-link" 
           routerLinkActive="active">Sign out</a>
       </li>

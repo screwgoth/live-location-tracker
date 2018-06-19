@@ -17,7 +17,7 @@ export class AuthService {
   setUserLoggedin(token, uname) {
   localStorage.setItem('user-token', token);
   }
-  isLoggedin() {
+  public isLoggedin() {
 
     return !!localStorage.getItem('user-token');
   }

@@ -1,2 +1,6 @@
-<h4>This is dashboard</h4>
-<p>Map data goes here</p>
+<div style="height: 500px;"
+     leaflet 
+     [leafletOptions]="options"
+     [leafletLayers]="layers" 
+     (leafletMapReady)="onMapReady($event)">
+</div>

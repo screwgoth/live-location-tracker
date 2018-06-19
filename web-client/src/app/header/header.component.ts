@@ -7,9 +7,11 @@ import { AuthService } from '.././services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  public isLoggedIn: boolean = false;
   constructor(private service: AuthService) { }
 
   ngOnInit() {
+    this.isLoggedIn = this.service.isLoggedin();
   }
   signOut() {
    localStorage.removeItem('user-token');

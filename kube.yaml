@@ -6,10 +6,10 @@ metadata:
     app: llt
     tier: db
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
   ports:
     - port: 3306
-      targetPort: 3306
+      #targetPort: 3306
   selector:
     app: llt
     tier: db
@@ -50,7 +50,7 @@ metadata:
     app: llt
     tier: backend
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
   ports:
     - port: 8000
       #targetPort: 3306
@@ -111,5 +111,5 @@ spec:
       containers:
         - image: raseel/llt-frontend:latest
           name: llt-web
-          ports:
-            - containerPort: 80
+          #ports:
+          #  - containerPort: 80
