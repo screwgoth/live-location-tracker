@@ -108,7 +108,7 @@ DATABASES = {
         'NAME': 'llt-db',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'HOST': 'llt-db',
         'PORT': '',
     }
 }
