@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: llt-db
+  labels:
+    app: llt
+    tier: db
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: llt
+    tier: db
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: llt-db
+  labels:
+    app: llt
+    tier: db
+spec:
+  template:
+    metadata:
+      labels:
+        app: llt
+        tier: db
+    spec:
+      containers:
+        - command:
+          - /entrypoint.sh
+          - --default-authentication-plugin=mysql_native_password
+          env:
+            - name: MYSQL_DATABASE
+              value: llt-db
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          name: llt-db
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llt-server
+  labels:
+    app: llt
+    tier: backend
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8000
+      #targetPort: 3306
+  selector:
+    app: llt
+    tier: backend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: llt-server
+  labels:
+    app: llt
+    tier: backend
+spec:
+  template:
+    metadata:
+      labels:
+        app: llt
+        tier: backend
+    spec:
+      containers:
+        - image: raseel/llt-backend:latest
+          name: llt-server
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llt-web
+  labels:
+    app: llt
+    tier: frontend
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: llt
+    tier: frontend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: llt-web
+  labels:
+    app: llt
+    tier: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        app: llt
+        tier: frontend
+    spec:
+      containers:
+        - image: raseel/llt-frontend:latest
+          name: llt-web
+          ports:
+            - containerPort: 80

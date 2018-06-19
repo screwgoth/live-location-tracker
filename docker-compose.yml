@@ -3,7 +3,7 @@ services:
 
     llt-web:
         build: ./web-client
-        image: llt-frontend:latest
+        image: raseel/llt-frontend:latest
         expose:
             - "80"
         ports:
@@ -15,7 +15,7 @@ services:
     
     llt-server:
         build: ./server
-        image: llt-backend:latest
+        image: raseel/llt-backend:latest
         expose:
             - "8000"
         depends_on:
